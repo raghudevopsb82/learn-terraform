@@ -66,7 +66,7 @@ output "o4" {
 
 # So far we are hardcoding the values in variables, Most times those come as input
 
-# Values from terraform.tfvars
+# Values from terraform.tfvars, Terraform picks this file automatically, Other tfvars needs to be parsed
 variable "v10" {}
 output "o10" {
   value = var.v10
@@ -78,6 +78,10 @@ variable "env" {}
 output "env" {
   value = var.env
 }
+
+# Terraform can pick the files automatically if the files are *.auto.tfvars
+
+
 
 
 
