@@ -59,5 +59,10 @@ output "o3" {
   value = var.v2[0]
 }
 
+# Access a value of Map
+output "o4" {
+  value = var.v3["cloud"]
+}
+
 
 
