@@ -66,10 +66,19 @@ output "o4" {
 
 # So far we are hardcoding the values in variables, Most times those come as input
 
+# Values from terraform.tfvars
 variable "v10" {}
 output "o10" {
   value = var.v10
 }
+
+# We can also access values from other tfvars too, but we need to parse that input
+# ex: dev.tfvars
+variable "env" {}
+output "env" {
+  value = var.env
+}
+
 
 
 
