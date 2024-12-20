@@ -1,14 +1,3 @@
-data "azurerm_resource_group" "example" {
-  name = "project-setup-1"
-}
-
-data "azurerm_subnet" "example" {
-  name                 = "default"
-  virtual_network_name = "project-setup-network"
-  resource_group_name  = data.azurerm_resource_group.example.name
-}
-
-
 resource "azurerm_network_interface" "example" {
   name                = "test-nic"
   location            =  data.azurerm_resource_group.example.location
