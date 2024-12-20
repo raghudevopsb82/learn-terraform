@@ -45,16 +45,19 @@ variable "v3" {
 
 
 ## Access your variable
-output "v1" {
+output "o1" {
   value = var.v1
 }
 
 # While accessing variable, if we have some string combination then we can access it with ${}
-output "v2" {
+output "o2" {
   value = "${var.v1} - John"
 }
 
-# Access a value
+# Access a value of list
+output "o3" {
+  value = var.v2[0]
+}
 
 
 
