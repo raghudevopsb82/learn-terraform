@@ -22,7 +22,8 @@ variable "demo" {
   default = [
     "orange",
     "apple",
-    "banana"
+    "banana",
+    "apricot"
   ]
 }
 
