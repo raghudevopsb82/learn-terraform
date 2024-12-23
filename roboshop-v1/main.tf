@@ -61,3 +61,15 @@ variable "components" {
 }
 
 
+data "azurerm_shared_image_version" "example" {
+  name                = "30.11.2024"
+  image_name          = "rhel9-devops-practice"
+  gallery_name        = "LDOTrail"
+  resource_group_name = "trail1"
+}
+
+
+output "id" {
+  value = data.azurerm_shared_image_version.example
+}
+
