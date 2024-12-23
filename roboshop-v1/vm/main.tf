@@ -42,13 +42,13 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   storage_os_disk {
-    name              = "myosdisk1"
+    name              = var.component
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
+    computer_name  = var.component
     admin_username = "testadmin"
     admin_password = "Password1234!"
   }
