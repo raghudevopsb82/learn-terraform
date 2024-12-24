@@ -28,7 +28,7 @@ resource "azurerm_virtual_machine" "main" {
   location              = data.azurerm_resource_group.example.location
   resource_group_name   = data.azurerm_resource_group.example.name
   network_interface_ids = [azurerm_network_interface.main.id]
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = "Standard_B2s"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   delete_os_disk_on_termination = true
@@ -57,21 +57,21 @@ resource "azurerm_virtual_machine" "main" {
   }
 
 
-  provisioner "remote-exec" {
-
-    connection {
-      type     = "ssh"
-      user     = "testadmin"
-      password = "Password1234!"
-      host     = azurerm_public_ip.main.ip_address
-    }
-
-    inline = [
-      "sudo dnf install python3.12-pip -y",
-      "sudo pip3.12 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
-    ]
-  }
+#   provisioner "remote-exec" {
+#
+#     connection {
+#       type     = "ssh"
+#       user     = "testadmin"
+#       password = "Password1234!"
+#       host     = azurerm_public_ip.main.ip_address
+#     }
+#
+#     inline = [
+#       "sudo dnf install python3.12-pip -y",
+#       "sudo pip3.12 install ansible",
+#       "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
+#     ]
+#   }
 }
 
 
