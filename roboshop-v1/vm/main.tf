@@ -87,7 +87,7 @@ resource "azurerm_virtual_machine" "main" {
 }
 
 resource "azurerm_dns_a_record" "main" {
-  name                = "${var.component}-dev.azdevopsb82.online"
+  name                = "${var.component}-dev"
   zone_name           = "azdevopsb82.online"
   resource_group_name = data.azurerm_resource_group.example.name
   ttl                 = 10
