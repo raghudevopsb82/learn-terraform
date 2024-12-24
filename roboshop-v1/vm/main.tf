@@ -11,6 +11,35 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
+resource "azurerm_network_security_group" "main" {
+  name                = "${var.component}-nsg"
+  location            =  data.azurerm_resource_group.example.location
+  resource_group_name = data.azurerm_resource_group.example.name
+
+  security_rule {
+    name                       = "main"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  tags = {
+    component = var.component
+  }
+}
+
+
+resource "azurerm_network_interface_security_group_association" "main" {
+  network_interface_id      = azurerm_network_interface.main.id
+  network_security_group_id = azurerm_network_security_group.main.id
+}
+
+
 resource "azurerm_public_ip" "main" {
   name                = "${var.component}-ip"
   location              = data.azurerm_resource_group.example.location
