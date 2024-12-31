@@ -17,11 +17,15 @@ data "vault_kv_secret" "secret_data" {
 
 resource "local_file" "local" {
   filename = "/tmp/pass"
-  #content = data.vault_kv_secret.secret_data.data
-  content = replace(replace(jsonencode(data.vault_kv_secret.secret_data), "\"", ""), ":", "=")
+  content = data.vault_kv_secret.secret_data.data_json["password"]
 }
 
 
+# resource "local_file" "full" {
+#   filename = "/tmp/pass"
+#   #content = data.vault_kv_secret.secret_data.data
+#   content = replace(replace(jsonencode(data.vault_kv_secret.secret_data), "\"", ""), ":", "=")
+# }
 
 
 
