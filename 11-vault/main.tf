@@ -15,8 +15,9 @@ data "vault_kv_secret" "secret_data" {
   path = "test/demo-ssh"
 }
 
-output "data" {
-  value = data.vault_kv_secret.secret_data
+resource "local_file" "local" {
+  filename = "/tmp/pass"
+  content = data.vault_kv_secret.secret_data
 }
 
 
