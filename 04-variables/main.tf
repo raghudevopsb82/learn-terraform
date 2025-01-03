@@ -34,7 +34,7 @@ variable "v2" {
 variable "v3" {
   default = {
     course = "devops"
-    cloud = "azure"
+    cloud  = "azure"
   }
 }
 

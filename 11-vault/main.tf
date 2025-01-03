@@ -6,7 +6,7 @@ provider "vault" {
   # This will default to using $VAULT_ADDR
   # But can be set explicitly
   address = "http://vault.azdevopsb82.online:8200"
-  token = var.token
+  token   = var.token
 }
 
 variable "token" {}
@@ -21,7 +21,7 @@ data "vault_generic_secret" "secret_data" {
 
 resource "local_file" "local" {
   filename = "/tmp/pass"
-  content = data.vault_generic_secret.secret_data.data["password"]
+  content  = data.vault_generic_secret.secret_data.data["password"]
 }
 
 

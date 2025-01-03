@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "main" {
   name                = "${var.component}-ip"
-  location              = data.azurerm_resource_group.example.location
-  resource_group_name   = data.azurerm_resource_group.example.name
+  location            = data.azurerm_resource_group.example.location
+  resource_group_name = data.azurerm_resource_group.example.name
   allocation_method   = "Static"
 
   tags = {
@@ -11,7 +11,7 @@ resource "azurerm_public_ip" "main" {
 
 resource "azurerm_network_interface" "main" {
   name                = "${var.component}-nic"
-  location            =  data.azurerm_resource_group.example.location
+  location            = data.azurerm_resource_group.example.location
   resource_group_name = data.azurerm_resource_group.example.name
 
   ip_configuration {
@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "main" {
 
 resource "azurerm_network_security_group" "main" {
   name                = "${var.component}-nsg"
-  location            =  data.azurerm_resource_group.example.location
+  location            = data.azurerm_resource_group.example.location
   resource_group_name = data.azurerm_resource_group.example.name
 
   security_rule {
@@ -98,23 +98,23 @@ resource "azurerm_virtual_machine" "main" {
 
 resource "null_resource" "ansible" {
 
-    depends_on = [azurerm_virtual_machine.main]
+  depends_on = [azurerm_virtual_machine.main]
 
-    provisioner "remote-exec" {
+  provisioner "remote-exec" {
 
-      connection {
-        type     = "ssh"
-        user     = "testadmin"
-        password = "Password1234!"
-        host     = azurerm_public_ip.main.ip_address
-      }
-
-      inline = [
-        "sudo dnf install python3.12-pip -y",
-        "sudo pip3.12 install ansible",
-        "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
-      ]
+    connection {
+      type     = "ssh"
+      user     = "testadmin"
+      password = "Password1234!"
+      host     = azurerm_public_ip.main.ip_address
     }
+
+    inline = [
+      "sudo dnf install python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
+    ]
+  }
 }
 
 
